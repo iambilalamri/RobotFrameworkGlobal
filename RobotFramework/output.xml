@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.2.2 (Python 3.9.1 on win32)" generated="20210307 20:39:33.912" rpa="false">
+<suite id="s1" name="CreateStudent" source="C:\Users\bilal\PycharmProjects\RobotFramework\Tests\FunctionalTestSuite\CreateStudent.robot">
+<test id="s1-t1" name="TC_004 create new resource">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>AddData</arg>
+<arg>${base_URL}</arg>
+</arguments>
+<msg timestamp="20210307 20:39:34.300" level="INFO">Creating Session using : alias=AddData, url=http://thetestingworldapi.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210307 20:39:34.300" endtime="20210307 20:39:34.301"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>first_name=Testing</arg>
+<arg>middle_name=A</arg>
+<arg>date_of_birth=12/10/2021</arg>
+<arg>last_name=B</arg>
+</arguments>
+<assign>
+<var>${data}</var>
+</assign>
+<msg timestamp="20210307 20:39:34.302" level="INFO">${data} = {'first_name': 'Testing', 'middle_name': 'A', 'date_of_birth': '12/10/2021', 'last_name': 'B'}</msg>
+<status status="PASS" starttime="20210307 20:39:34.302" endtime="20210307 20:39:34.302"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>${header}</var>
+</assign>
+<msg timestamp="20210307 20:39:34.303" level="INFO">${header} = {'Content-Type': 'application/json'}</msg>
+<status status="PASS" starttime="20210307 20:39:34.303" endtime="20210307 20:39:34.303"></status>
+</kw>
+<kw name="Post On Session" library="RequestsLibrary">
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<arguments>
+<arg>AddData</arg>
+<arg>api/studentsDetails</arg>
+<arg>json=${data}</arg>
+<arg>headers=${header}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20210307 20:39:34.714" level="INFO">POST Request : url=http://thetestingworldapi.com/api/studentsDetails 
+ path_url=/api/studentsDetails 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '94'} 
+ body=b'{"first_name": "Testing", "middle_name": "A", "date_of_birth": "12/10/2021", "last_name": "B"}' 
+ </msg>
+<msg timestamp="20210307 20:39:34.715" level="INFO">POST Response : url=http://thetestingworldapi.com/api/studentsDetails 
+ status=201, reason=Created 
+ headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Location': 'http://thetestingworldapi.com/api/studentsDetails/96934', 'Server': 'Microsoft-IIS/8.5', 'X-AspNet-Version': '4.0.30319', 'X-Powered-By': 'ASP.NET', 'X-Powered-By-Plesk': 'PleskWin', 'Date': 'Sun, 07 Mar 2021 19:39:33 GMT', 'Content-Length': '98'} 
+ body={"id":96934,"first_name":"Testing","middle_name":"A","last_name":"B","date_of_birth":"12/10/2021"} 
+ </msg>
+<msg timestamp="20210307 20:39:34.715" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20210307 20:39:34.304" endtime="20210307 20:39:34.715"></status>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<doc>Converts the given item to a Unicode string.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+</arguments>
+<assign>
+<var>${code}</var>
+</assign>
+<msg timestamp="20210307 20:39:34.716" level="INFO">${code} = 201</msg>
+<status status="PASS" starttime="20210307 20:39:34.716" endtime="20210307 20:39:34.717"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+</arguments>
+<status status="PASS" starttime="20210307 20:39:34.717" endtime="20210307 20:39:34.718"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${code}</arg>
+<arg>201</arg>
+</arguments>
+<status status="PASS" starttime="20210307 20:39:34.719" endtime="20210307 20:39:34.719"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${response.content}</arg>
+</arguments>
+<status status="PASS" starttime="20210307 20:39:34.720" endtime="20210307 20:39:34.721"></status>
+</kw>
+<status status="PASS" starttime="20210307 20:39:34.299" endtime="20210307 20:39:34.722" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20210307 20:39:33.915" endtime="20210307 20:39:34.724"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" id="s1" name="CreateStudent">CreateStudent</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
